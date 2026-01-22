@@ -31,25 +31,37 @@ const faqs = [
 
 export function FAQ() {
   return (
-    <section id="showcase" className="py-24 relative">
-      <div className="container mx-auto px-6 lg:px-12">
+    <section id="showcase" className="py-32 relative">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-secondary/10 via-transparent to-transparent" />
+      
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
           {/* Left column - Header */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:sticky lg:top-32 lg:self-start"
           >
-            <span className="text-xs font-mono text-primary tracking-widest uppercase mb-4 block">
+            <span className="inline-block text-xs font-mono text-primary tracking-[0.2em] uppercase mb-4 px-4 py-2 rounded-full badge-premium">
               F.A.Q.
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Frequently Asked <span className="text-primary">Questions</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 mb-6">
+              Frequently Asked{" "}
+              <span className="text-gradient">Questions</span>
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-muted-foreground leading-relaxed">
               Everything you need to know about deploying ThemisAevra in your operations.
             </p>
+            
+            {/* Decorative element */}
+            <div className="hidden lg:block mt-12">
+              <div className="w-24 h-24 rounded-2xl border border-primary/20 bg-primary/5 flex items-center justify-center">
+                <span className="text-4xl">?</span>
+              </div>
+            </div>
           </motion.div>
 
           {/* Right column - Accordion */}
@@ -57,19 +69,19 @@ export function FAQ() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
             <Accordion type="single" collapsible className="space-y-4">
               {faqs.map((faq, index) => (
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
-                  className="border border-border/50 rounded-xl px-6 bg-card/30 backdrop-blur-sm data-[state=open]:border-primary/30 transition-colors"
+                  className="border-0 rounded-2xl overflow-hidden card-premium data-[state=open]:shadow-[0_0_30px_hsl(var(--primary)/0.1)]"
                 >
-                  <AccordionTrigger className="text-left hover:no-underline py-5">
-                    <span className="font-semibold pr-4">{faq.question}</span>
+                  <AccordionTrigger className="text-left hover:no-underline px-6 py-5 text-base font-semibold hover:text-primary transition-colors [&[data-state=open]]:text-primary">
+                    <span className="pr-4">{faq.question}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5">
+                  <AccordionContent className="text-muted-foreground px-6 pb-6 leading-relaxed">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
